@@ -22,6 +22,7 @@ MANIFEST
 .py
 
 # Environment files
+api.env
 .env
 .env.*
 .venv
