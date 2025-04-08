@@ -6,11 +6,16 @@ const dashboardRouter = require("./routes/dashboard");
 const loggedIn = require("./models/helper");
 const session = require("express-session")
 const MongoStore = require('connect-mongo');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 const uri = "mongodb+srv://shlok:j0WCgfu59b8iBK8F@main.lh5dwv4.mongodb.net/data?retryWrites=true&w=majority&appName=main";
-mongoose.connect(uri);
 
+mongoose.connect(uri);
+app.set("view engine", "ejs");
+app.set("views", "views");
+
+app.use(express.static("public"))
 app.use(session({
     secret: 'rishitsucks', 
     resave: false,
@@ -18,7 +23,7 @@ app.use(session({
     store: MongoStore.create({
         mongoUrl: uri,  
         collectionName: 'sessions',
-        ttl: 30 * 24 * 60 * 60
+        ttl: 30 * 24 * 60 * 60 * 1000
     }),
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 7 
@@ -43,7 +48,6 @@ app.use((req, res, next) => {
     return res.redirect("/");
 })
 
-app.use(express.urlencoded({ extended: true }));
 app.use("/dashboard", dashboardRouter)
 app.use("/login", loginRouter);
 app.use("/signup", signupRouter);
@@ -53,7 +57,7 @@ app.get('/', (req, res) => {
     if (isLoggedIn) {
         return res.redirect("/dashboard");  
     }
-    res.sendFile("index.html", {root: "./views/"});
+    res.render("index.ejs");
 });
 
 app.get("/logout", (req, res) => {

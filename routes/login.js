@@ -3,7 +3,7 @@ const loginRouter = express.Router();
 const User = require("../models/user");
 
 loginRouter.get("/", (req, res, next) => {
-    res.sendFile("login.html", {root: "./views"})
+    res.sendFile("login.ejs")
 })
 
 loginRouter.post("/", async (req, res, next) => {
