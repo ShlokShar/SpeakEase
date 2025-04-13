@@ -6,7 +6,7 @@ const dashboardRouter = require("./routes/dashboard");
 const loggedIn = require("./models/helper");
 const session = require("express-session")
 const MongoStore = require('connect-mongo');
-
+const bodyParser = require("body-parser")
 const app = express();
 const PORT = process.env.PORT || 3000;
 const uri = "mongodb+srv://shlok:j0WCgfu59b8iBK8F@main.lh5dwv4.mongodb.net/data?retryWrites=true&w=majority&appName=main";
@@ -14,8 +14,10 @@ const uri = "mongodb+srv://shlok:j0WCgfu59b8iBK8F@main.lh5dwv4.mongodb.net/data?
 mongoose.connect(uri);
 app.set("view engine", "ejs");
 app.set("views", "views");
-
-app.use(express.static("public"))
+app.use(express.json());
+app.use(express.static("public"));
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(session({
     secret: 'rishitsucks', 
     resave: false,

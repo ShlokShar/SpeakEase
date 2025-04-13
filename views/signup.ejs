@@ -3,13 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign up</title>
+    <title>SpeakEase</title>
+    <link href="/css/output.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inclusive+Sans:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <style>
+        input[type="submit"] {
+            background-image: linear-gradient(to right, #312f76 50%, #433BFF 50%);
+            background-size: 200% 100%;
+            transition: background-position 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-position: -100% 0;
+        }
+    </style>
 </head>
-<body>
-    <form action="/signup" method="POST">
-        <input id="email" type="email" value="email" name="email" required>
-        <input id="password" type="password" value="password" name="password" required>
-        <input type="submit">
-    </form>
+<body class="bg-[#FBFBFE] h-screen">
+    <div class="w-full flex ">
+        <div class="w-[400px] p-4 h-full items-center">
+            <div class="flex flex-col h-[96vh] bg-[#F3F2FF] border-4 rounded-[20px] border-[#403d8a] p-6 justify-center items-center">
+                <img src="../img/logo.png" width="180px">
+                <br>
+                <br>
+                <div class="w-[180px]">
+                    <form action="/signup" method="POST" class="w-full space-y-3 font-[Fredoka]">
+                        <label class="">Name</label>
+                        <br>
+                        <input id="name" name="name" placeholder="John Smith" class="rounded-[10px] border-2 border-[#cccbcb] bg-[#ffffff] px-1 py-1" required>
+                        <br>
+                        <label>Email</label>
+                        <input id="email" name="email" placeholder="john@example.com" class="rounded-[10px] border-2 border-[#cccbcb] bg-[#ffffff] px-1 py-1" required>
+                        <br>
+                        <label>Password</label>
+                        <input id="password" name="password" type="password" placeholder="********" class="rounded-[10px] border-2 border-[#cccbcb] bg-[#ffffff] px-1 py-1" required>
+                        <br>
+                        <label>Native Language</label>
+                        <br>
+                        <select class="bg-white w-full px-2 py-1 rounded-[20px]">
+                            <option>🇪🇸 Español (Spanish)</option>
+                            <option>🇨🇳 中文 (Chinese)</option>
+                            <option>🇵🇭 Tagalog (Filipino)</option>
+                            <option>🇻🇳 Tiếng Việt (Vietnamese)</option>
+                            <option>🇸🇦 العربية (Arabic)</option>
+
+                        </select>
+                        <br>
+                        <br>  
+                        <input class="w-full bg-[#433BFF] px-3 py-2 rounded-[15px] text-white text-[18px]" type="submit"></input>
+                    </form>
+                    <br>
+                    
+                </div> 
+            </div>
+            
+        </div>
+    </div>
+    
+    <script src="../js/visuals.js"></script>
 </body>
 </html>

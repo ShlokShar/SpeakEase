@@ -3,7 +3,7 @@ const signupRouter = express.Router();
 const User = require("../models/user");
 
 signupRouter.get("/", (req, res, next) => {
-    res.sendFile("signup.ejs")
+    res.render("signup.ejs")
 })
 
 

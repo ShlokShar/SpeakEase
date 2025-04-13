@@ -1,0 +1,67 @@
+#flag-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.flag {
+    position: absolute;
+    font-size: 24px;
+    transition: transform 0.3s;
+    animation: float 5s infinite ease-in-out alternate;
+    cursor: pointer;
+}
+
+.flag:hover {
+    transform: scale(1.5) rotate(10deg);
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    100% {
+        transform: translateY(-10px) rotate(3deg);
+    }
+}
+
+.features-container {
+    position: relative;
+    overflow: hidden; /* Ensure the rounded corners are not clipped */
+}
+
+.features-content {
+    position: relative;
+    z-index: 1;
+}
+
+.features-container::before,
+.features-container::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 0;
+    background-color: black;
+    opacity: 0; /* Start with opacity 0 to hide the box */
+    border-radius: 20px; /* Adjust the border-radius to match your chatbot div */
+    transition: height 0.3s ease-in, opacity 0.5s ease-in, left 0.1s ease-out, right 1s ease-out; /* Set the animation duration */
+    pointer-events: none; /* Allow interaction with the elements below */
+    transform-origin: bottom; /* Set the transform origin to the bottom */
+}
+
+.features-container:hover::before,
+.features-container:hover::after {
+    opacity: 1; /* Make the box visible on hover */
+    height: 100%; /* Set the height to 100% on hover */
+    left: 0; /* Cover the left padding */
+    right: 0; /* Cover the right padding */
+}
+
+.features-container::before {
+    bottom: 0; /* Position at the bottom */
+    right: 100%; /* Move the right edge out of the box */
+}
+
+.features-container::after {
+    top: 0; /* Position at the top */
+    left: 100%; /* Move the left edge out of the box */
+}

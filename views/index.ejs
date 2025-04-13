@@ -4,12 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpeakEase</title>
+    <link href="/css/output.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inclusive+Sans:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Home Page</h1>
-    <a href="/login">Login</a>
-    <a href="/signup">Sign up</a>
+<body class="bg-[#FBFBFE]">
+    <div class="w-full flex flex-col space-y-4 px-6 pt-6">
+        <div class="w-full flex flex-row justify-between items-center">
+            <img src="../img/logo.png" draggable="false"width="160px">
+            <div class="flex flex-row space-x-4 items-center">
+                <p onclick="window.location.href = '/signup'" class="cursor-pointer hover:translate-y-0.5 transform transition duration-200">Sign Up</p>
+                <div onclick="window.location.href = '/login'" class="bg-[#2F27CE] h-min px-3 py-2 rounded-[20px] cursor-pointer hover:translate-y-0.5 transform transition duration-200">
+                    <p class="text-white ">Log In</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-[#F3F2FF] w-full flex flex-row items-center justify-around h-[414px] rounded-[15px]">
+            <div class="flex flex-col space-y-3 px-6">
+                <p class="w-[400px] leading-[48px] text-[40px] font-[Fredoka]">Learning <span class="text-[#2F27CE]">English</span> shouldn't feel impossible.</p>
+                <p class="w-[272px] leading-[22px] text-[16px] font-[Inclusive Sans]">Start speaking with confidence. We've got your back.</p>
+                <div class="bg-[#2F27CE] w-[124px] flex flex-row justify-center items-center rounded-[20px] hover:translate-y-0.5 transform transition duration-200">
+                    <p onclick="window.location.href = '/signup'" class="text-white px-2 py-3 text-[18px] font-bold font-sans cursor-pointer ">Get Started</p>
+                </div>
+            </div>
+            <div class="flex flex-col rounded-[15px] w-[648px] bg-white h-[380px]" id="flag-container">
+                
+            </div>
+        </div>
+    </div>
+    
     <br>
-    <a href="/logout">Logout</a>
+    <div class="flex flex-col sm:flex-row p-5 justify-center items-center sm:space-x-5 space-y-2">
+        <div class="flex max-sm:w-full sm:grow bg-[#252082] p-1 h-0.5 rounded-full">
+    
+        </div>
+        <div class="features-container text-white font-poppins bg-[#252082] p-3 rounded-3xl flex flex-col w-full sm:w-[250px]">
+            <div class="features-content">
+                <p>💬</p>
+                <p>Chatbot</p>
+                <br>
+                <p class="text-sm text-gray-100">Practice learning English by texting a bot that interacts as a native
+                    speaker.</p>
+            </div>
+        </div>
+    
+    
+        <div class="features-container text-white font-poppins bg-[#252082] p-3 rounded-3xl flex flex-col w-full sm:w-[250px]">
+            <div class="features-content">
+                <p>✍️</p>
+                <p>Practice Problems</p>
+                <br>
+                <p class="text-sm text-gray-100">Learn English with personalized grammar, vocabulary, and phrases
+                    practice.</p>
+            </div>
+        </div>
+    
+        <div class="features-container text-white font-poppins bg-[#252082] p-3 rounded-3xl flex flex-col w-full sm:w-[250px]">
+            <div class="features-content">
+                <p>📈</p>
+                <p>Analyze</p>
+                <br>
+                <p class="text-sm text-gray-100">See your overall & accuracy and see where to improve on in your grammar and
+                    speaking.</p>
+            </div>
+        </div>
+        <div class="flex max-sm:w-full sm:grow bg-[#252082] p-1 h-0.5 rounded-full">
+    
+        </div>
+    </div>
+    <script src="../js/visuals.js"></script>
 </body>
 </html>

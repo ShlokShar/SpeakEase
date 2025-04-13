@@ -5,13 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpeakEase</title>
     <link href="/css/output.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inclusive+Sans:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
 </head>
-<body>
-    <h1 class="text-blue-500">Dashboard :P :D</h1>
-    <div>
-        <input id="textInput" type="text" value="type here">
-        <button onclick="sendText()">send</button>
+<body class="bg-[#FBFBFE] h-screen">
+    <div class="w-full flex flex-col space-y-4 px-6 pt-6 h-full">
+        <div class="w-full flex flex-row justify-between items-center">
+            <img src="../img/logo.png" draggable="false" width="160px">
+            <div class="flex flex-row space-x-4 items-center">
+                <p class="cursor-pointer">Log Out</p>
+            </div>
+        </div>
+        <br>
+        <div class="w-full flex flex-row h-full space-x-6 pb-2">
+            <div class="flex flex-col space-y-2.5">
+                <div onclick="switchSection('chatbot-container')" class="relative w-full max-w-md mx-auto cursor-pointer">
+                    <img src="/img/chatbot.png" alt="Example" class="w-full h-auto" />
+                    <div class="flex flex-col absolute inset-0 items-center justify-center">
+                        <p class="text-white text-2xl font-bold">Chatbot</p>
+                        <p class="text-[#AAA7FC] text-xl">聊天机器人</p>
+                    </div>
+                </div>
+                <div onclick="switchSection('vocabulary-container')" class="relative w-full max-w-md mx-auto cursor-pointer">
+                    <img src="/img/vocab.png" alt="Example" class="w-full h-auto" />
+                    <div class="flex flex-col absolute inset-0 items-center justify-center">
+                        <p class="text-white text-2xl font-bold">Vocabulary</p>
+                        <p class="text-[#AAA7FC] text-xl">词汇</p>
+                    </div>
+                </div>
+                <div onclick="switchSection('grammar-container')" class="relative w-full max-w-md mx-auto cursor-pointer">
+                    <img src="/img/grammar.png" alt="Example" class="w-full h-auto" />
+                    <div class="flex flex-col absolute inset-0 items-center justify-center">
+                        <p class="text-white text-2xl font-bold">Grammar</p>
+                        <p class="text-[#AAA7FC] text-xl">语法</p>
+                    </div>
+                </div>
+            </div>
+            <div id="chatbot-container" class="max-w-[900px] grow flex flex-col bg-[#D1D1D1] rounded-[15px]">
+                <div class="w-full bg-[#544DEA] rounded-t-[15px]">
+                    <p class="px-3 py-2 font-[Fredoka] text-[18px] text-white">Chatbot — Luigi</p>
+                </div>
+                <div id="chat-container" class="grow px-2 py-3 flex flex-col space-y-2 h-[78vh] overflow-y-hidden">
+                    <div class="flex space-x-2">
+                        <p class="text-3xl">🌎</p>
+                        <p class="max-w-[250px] bg-white p-2 rounded-b-[15px] rounded-r-[15px]">Hi :3</p>
+                    </div>
+                    <div class="flex space-x-2">
+                        <p class="grow"></p>
+                        <p class="max-w-[250px] text-white bg-[#544DEA] p-2 rounded-b-[15px] rounded-l-[15px]">Hi :3</p>
+                    </div>
+                </div>
+                <div>
+                <div class="w-full flex flex-row space-x-4 p-2">
+                    <input id="input-element" class="bg-white px-2 py-0.5 rounded-[15px] w-full" placeholder="Type Here — 在此输入">
+                    <button onclick="sendText()" class="bg-[#544DEA] px-3 rounded-[18px] text-white">Send</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <script src="/js/main.js"></script>
+    <script>
+        const chatContainer = document.getElementById('chat-container');
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+
+        let currentSection = "chatbot-container";
+
+        const switchSection = (newSection) => {
+            document.getElementById(currentSection).style = "display: none;";
+            document.getElementById(newSection).style = "display: flex";
+            currentSection = newSection;
+        }
+    </script>
+    <script src="/js/dashboard.js"></script>
 </body>
 </html>
