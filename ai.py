@@ -8,7 +8,7 @@ load_dotenv()
 api_key = os.getenv('MY_API_KEY')
 genai.configure(api_key=api_key)
 
-model = genai.GenerativeModel('gemini-pro')
+model = genai.GenerativeModel('gemini-2.0-flash')
 
 def generate_english_quiz(quiz_type: str, difficulty: str, user_language: str) -> dict:
     prompt = f"""
@@ -67,17 +67,23 @@ def english_learning_chat(user_message: str, conversation_history: list, user_la
 
     history_snippet = "\n".join(conversation_history[-6:])
     context = f"""
-You are an English teaching assistant helping a {user_language} speaker learn English.
-Your responses should:
-1. Be helpful for English language practice
-2. Provide gentle corrections when needed
-3. Be culturally sensitive
-4. Optionally include {user_language} translations for complex concepts
-5. Maintain ethical standards at all times
+    You are a friendly and patient English conversation partner helping a native {user_language} speaker improve their English skills through real conversation.
 
-Current conversation history:
-{history_snippet}
-"""
+    Your goals are to:
+    1. Keep the conversation going in natural, everyday English.
+    2. Encourage the user to respond in English and express their ideas.
+    3. Gently correct grammar or vocabulary mistakes **only when they interfere with understanding**, and offer an improved version.
+    4. Occasionally suggest better word choices or sentence structures **after** the user finishes a message.
+    5. Use {user_language} translations only for difficult words or abstract ideas if the user seems confused.
+    6. Ask follow-up questions to keep the learner engaged and practicing.
+    7. Be encouraging and help build the user’s confidence.
+    8. Do NOT give long grammar explanations unless the user asks directly — focus on conversation.
+
+    Start by greeting the user and asking them a simple question in English to get them talking. Then, follow their lead and guide the conversation like a real English tutor would.
+
+    Current conversation history:
+    {history_snippet}
+    """
 
     try:
         response = model.generate_content(
