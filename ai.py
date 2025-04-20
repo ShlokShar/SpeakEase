@@ -2,6 +2,7 @@ import os
 import json
 import google.generativeai as genai
 from dotenv import load_dotenv
+##pip install google-generativeai python-dotenv
 
 load_dotenv()
 api_key = os.getenv('MY_API_KEY')

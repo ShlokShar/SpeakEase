@@ -25,27 +25,27 @@
                     <img src="/img/chatbot.png" alt="Example" class="w-full h-auto" />
                     <div class="flex flex-col absolute inset-0 items-center justify-center">
                         <p class="text-white text-2xl font-bold">Chatbot</p>
-                        <p class="text-[#AAA7FC] text-xl">聊天机器人</p>
+                        <p class="text-[#AAA7FC] text-xl">chatbot</p>
                     </div>
                 </div>
                 <div onclick="switchSection('vocabulary-container')" class="relative w-full max-w-md mx-auto cursor-pointer">
                     <img src="/img/vocab.png" alt="Example" class="w-full h-auto" />
                     <div class="flex flex-col absolute inset-0 items-center justify-center">
                         <p class="text-white text-2xl font-bold">Vocabulary</p>
-                        <p class="text-[#AAA7FC] text-xl">词汇</p>
+                        <p class="text-[#AAA7FC] text-xl">vocabulario</p>
                     </div>
                 </div>
                 <div onclick="switchSection('grammar-container')" class="relative w-full max-w-md mx-auto cursor-pointer">
                     <img src="/img/grammar.png" alt="Example" class="w-full h-auto" />
                     <div class="flex flex-col absolute inset-0 items-center justify-center">
                         <p class="text-white text-2xl font-bold">Grammar</p>
-                        <p class="text-[#AAA7FC] text-xl">语法</p>
+                        <p class="text-[#AAA7FC] text-xl">gramática</p>
                     </div>
                 </div>
             </div>
-            <div id="chatbot-container" class="max-w-[900px] grow flex flex-col bg-[#D1D1D1] rounded-[15px]" style="display: none;">
+            <div id="chatbot-container" class="max-w-[900px] grow flex flex-col bg-[#D1D1D1] rounded-[15px]" style="display: flex;">
                 <div class="w-full bg-[#544DEA] rounded-t-[15px]">
-                    <p class="px-3 py-2 font-[Fredoka] text-[18px] text-white">Chatbot — Luigi</p>
+                    <p class="px-3 py-2 font-[Fredoka] text-[18px] text-white">SpeakBot</p>
                 </div>
                 <div id="chat-container" class="grow px-2 py-3 flex flex-col space-y-2 h-[78vh] overflow-y-auto">
                     <% for (let i = 0; i < chatLog.length; i++) { %>
@@ -63,27 +63,27 @@
                     <% } %>
                 </div>
                 <div class="w-full flex flex-row space-x-4 p-2">
-                    <input id="input-element" class="bg-white px-2 py-0.5 rounded-[15px] w-full" placeholder="Type Here — 在此输入">
+                    <input id="input-element" class="bg-white px-2 py-0.5 rounded-[15px] w-full" placeholder="Type Here — escribe aquí">
                     <button onclick="sendText()" class="bg-[#544DEA] px-3 rounded-[18px] text-white">Send</button>
                 </div>
             </div>
-            <div id="vocabulary-container" class="max-w-[900px] grow flex flex-col bg-[#e1dede] rounded-[15px]" style="display: flex;">
+            <div id="vocabulary-container" class="max-w-[900px] grow flex flex-col bg-[#e1dede] rounded-[15px]" style="display: none;">
                 <div id="vocabulary-questions-container" class="grow px-2 py-3 flex flex-col space-y-2 h-[78vh] overflow-y-auto justify-center items-center font-[Fredoka]">
                     <div class="w-[400px] p-2">
                         <div style="display: none;" class="flex flex-col">
-                            <p class="text-[18px]">¿Como se dice "hola" en ingles?</p>
+                            <p class="text-[18px]"></p>
                             <form class="text-[16px]">
                                 <div class="flex flex-row space-x-2 items-center">
-                                    <input name="vocabulary" type="radio" value="1"><label>Hello</label>
+                                    <input name="vocabulary" type="radio" value="1"><label></label>
                                 </div>
                                 <div class="flex flex-row space-x-2 items-center">
-                                    <input name="vocabulary" type="radio" value="2"><label>Bye</label>
+                                    <input name="vocabulary" type="radio" value="2"><label></label>
                                 </div>
                                 <div class="flex flex-row space-x-2 items-center">
-                                    <input name="vocabulary" type="radio" value="3"><label>Hawk Tuah</label>
+                                    <input name="vocabulary" type="radio" value="3"><label></label>
                                 </div>
                                 <div class="flex flex-row space-x-2 items-center">
-                                    <input name="vocabulary" type="radio" value="4"><label>Meow :3</label>
+                                    <input name="vocabulary" type="radio" value="4"><label></label>
                                 </div>
                             </form>
                         </div>
@@ -111,9 +111,50 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full flex flex-row space-x-4 p-2">
-                    <div class="flex grow"></div> 
-                    <button onclick="sendText()" class="bg-[#544DEA] py-0.5 px-3 rounded-[18px] text-white">Check</button>
+            </div>
+            <div id="grammar-container" class="max-w-[900px] grow flex flex-col bg-[#e1dede] rounded-[15px]" style="display: none;">
+                <div id="grammar-questions-container" class="grow px-2 py-3 flex flex-col space-y-2 h-[78vh] overflow-y-auto justify-center items-center font-[Fredoka]">
+                    <div class="w-[400px] p-2">
+                        <div style="display: none;" class="flex flex-col">
+                            <p class="text-[18px]"></p>
+                            <form class="text-[16px]">
+                                <div class="flex flex-row space-x-2 items-center">
+                                    <input name="vocabulary" type="radio" value="1"><label></label>
+                                </div>
+                                <div class="flex flex-row space-x-2 items-center">
+                                    <input name="vocabulary" type="radio" value="2"><label></label>
+                                </div>
+                                <div class="flex flex-row space-x-2 items-center">
+                                    <input name="vocabulary" type="radio" value="3"><label></label>
+                                </div>
+                                <div class="flex flex-row space-x-2 items-center">
+                                    <input name="vocabulary" type="radio" value="4"><label></label>
+                                </div>
+                            </form>
+                        </div>
+                        <div style="display: flex;" class="flex flex-col">
+                            <p class="text-[18px]">Create Grammar Quiz</p>
+                            <form id="create-grammar-form" class="text-[16px]">
+
+                                <div class="flex flex-row space-x-2 items-center">
+                                    <input name="office" type="checkbox" value="present tense"><label>Present Tense</label>
+                                </div>
+                                <div class="flex flex-row space-x-2 items-center">
+                                    <input name="school" type="checkbox" value="preterite tense"><label>Preterite Tense</label>
+                                </div>
+                                <div class="flex flex-row space-x-2 items-center">
+                                    <input name="daily life" type="checkbox" value="future tenses"><label>Future Tense</label>
+                                </div>
+                                <div class="flex flex-row space-x-2 items-center">
+                                    <input name="emergency & safety" type="checkbox" value="perfect tenses"><label>Perfect Tenses</label>
+                                </div>
+                                <div>
+                                    <button type="submit" class="bg-[#544DEA] px-3 py-0.5 text-white rounded-[15px] mt-1">Create</button>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -122,7 +163,7 @@
         const chatContainer = document.getElementById('chat-container');
         chatContainer.scrollTop = chatContainer.scrollHeight;
 
-        let currentSection = "vocabulary-container";
+        let currentSection = "chatbot-container";
 
         const switchSection = (newSection) => {
             document.getElementById(currentSection).style = "display: none;";

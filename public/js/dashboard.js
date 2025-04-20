@@ -14,7 +14,7 @@ const sendText = () => {
     chatContainer.innerHTML += `
         <div class="flex space-x-2">
             <p class="grow"></p>
-            <p class="max-w-[250px] text-white bg-[#544DEA] p-2 rounded-b-[15px] rounded-l-[15px]">${text}</p>
+            <p class="max-w-[250px] text-white bg-[#544DEA] p-2 rounded-b-[15px] rounded-l-[15px] text-[14px]">${text}</p>
         </div>`;
 
     fetch("/dashboard/", {
@@ -28,51 +28,32 @@ const sendText = () => {
         chatContainer.innerHTML += `
             <div class="flex space-x-2">
                 <p class="text-3xl">🌎</p>
-                <p class="max-w-[250px] bg-white p-2 rounded-b-[15px] rounded-r-[15px]">${response}</p>
+                <p class="max-w-[250px] bg-white p-2 rounded-b-[15px] rounded-r-[15px] text-[14px]">${response}</p>
             </div>`;
     });
 };
 
-// ===== VOCAB QUIZ LOGIC =====
 
-const quizQuestions = [
-    {
-        question: 'What does "ambulance" mean?',
-        choices: ['Fire Truck', 'Police Car', 'Emergency Vehicle', 'Bus'],
-        correct: 2
-    },
-    {
-        question: 'What does "classroom" mean?',
-        choices: ['Hospital', 'Office', 'Place to Study', 'Gym'],
-        correct: 2
-    },
-    {
-        question: 'What does "evacuate" mean?',
-        choices: ['Enter', 'Stay', 'Leave Quickly', 'Sleep'],
-        correct: 2
-    },
-    {
-        question: 'What does "pencil" mean?',
-        choices: ['Something you write with', 'Something you eat', 'Clothing', 'Furniture'],
-        correct: 0
-    },
-    {
-        question: 'What does "fire drill" mean?',
-        choices: ['Real Fire', 'Cooking Show', 'Practice Emergency', 'Tool'],
-        correct: 2
-    }
-];
 
-let currentQuestionIndex = 0;
-let score = 0;
+let currentVocabQuestionIndex = 0;
+let currentGrammarQuestionIndex = 0;
+let scoreVocab = 0;
+let scoreGrammar = 0;
 
-const quizSection = document.querySelector("#vocabulary-questions-container");
-const createForm = document.getElementById("create-vocab-form");
-const questionBox = quizSection.querySelectorAll("form")[1];
-const questionWrapper = questionBox.parentElement;
+const vocabQuizSection = document.querySelector("#vocabulary-questions-container");
+const grammarQuizSection = document.querySelector("#grammar-questions-container");
 
-const renderQuestion = () => {
-    const q = quizQuestions[currentQuestionIndex];
+const createVocabForm = document.getElementById("create-vocab-form");
+const createGrammarForm = document.getElementById("create-grammar-form");
+
+const vocabQuestionBox = vocabQuizSection.querySelectorAll("form")[1];
+const grammarQuestionBox = grammarQuizSection.querySelectorAll("form")[1];
+
+const vocabQuestionWrapper = vocabQuestionBox.parentElement;
+const grammarQuestionWrapper = grammarQuestionBox.parentElement;
+
+const renderVocabQuestion = () => {
+    const q = vocabQuizQuestions[currentVocabQuestionIndex];
     let optionsHtml = "";
     q.choices.forEach((choice, idx) => {
         optionsHtml += `
@@ -82,20 +63,20 @@ const renderQuestion = () => {
             </div>`;
     });
 
-    questionWrapper.innerHTML = `
+    vocabQuestionWrapper.innerHTML = `
         <p class="text-[18px] mb-2">${q.question}</p>
         <form class="text-[16px] space-y-2">${optionsHtml}</form>
-        <button id="check-btn" class="mt-2 bg-[#544DEA] text-white px-3 py-0.5 rounded-[15px]">Check</button>
-        <p id="feedback" class="text-[16px] mt-2 font-bold"></p>
+        <button id="vocab-check-btn" class="mt-2 bg-[#544DEA] text-white px-3 py-0.5 rounded-[15px]">Check</button>
+        <p id="vocab-feedback" class="text-[16px] mt-2 font-bold"></p>
     `;
 
-    document.querySelector("#check-btn").addEventListener("click", checkAnswer);
+    document.querySelector("#vocab-check-btn").addEventListener("click", checkVocabAnswer);
 };
 
-const checkAnswer = (e) => {
+const checkVocabAnswer = (e) => {
     e.preventDefault();
     const selected = document.querySelector('input[name="vocabulary"]:checked');
-    const feedback = document.getElementById("feedback");
+    const feedback = document.getElementById("vocab-feedback");
 
     if (!selected) {
         feedback.textContent = "Please select an answer.";
@@ -104,56 +85,150 @@ const checkAnswer = (e) => {
     }
 
     const selectedIndex = parseInt(selected.value);
-    const isCorrect = selectedIndex === quizQuestions[currentQuestionIndex].correct;
+    const isCorrect = selectedIndex === vocabQuizQuestions[currentVocabQuestionIndex].correct;
 
     if (isCorrect) {
         feedback.textContent = "Correct! ✅";
         feedback.classList.remove("text-red-500");
         feedback.classList.add("text-green-600");
-        score++;
+        scoreVocab++;
     } else {
-        const correctText = quizQuestions[currentQuestionIndex].choices[quizQuestions[currentQuestionIndex].correct];
+        const correctText = vocabQuizQuestions[currentVocabQuestionIndex].choices[vocabQuizQuestions[currentVocabQuestionIndex].correct];
         feedback.textContent = `Wrong ❌ — Correct answer is "${correctText}".`;
         feedback.classList.remove("text-green-600");
         feedback.classList.add("text-red-500");
     }
 
-    document.getElementById("check-btn").textContent = "Next";
-    document.getElementById("check-btn").removeEventListener("click", checkAnswer);
-    document.getElementById("check-btn").addEventListener("click", nextQuestion);
+    document.getElementById("vocab-check-btn").textContent = "Next";
+    document.getElementById("vocab-check-btn").removeEventListener("click", checkVocabAnswer);
+    document.getElementById("vocab-check-btn").addEventListener("click", nextVocabQuestion);
 };
 
-const nextQuestion = (e) => {
+const nextVocabQuestion = (e) => {
     e.preventDefault();
-    currentQuestionIndex++;
+    currentVocabQuestionIndex++;
 
-    if (currentQuestionIndex < quizQuestions.length) {
-        renderQuestion();
+    if (currentVocabQuestionIndex < vocabQuizQuestions.length) {
+        renderVocabQuestion();
     } else {
-        showScore();
+        showVocabScore();
     }
 };
 
-const showScore = () => {
-    questionWrapper.innerHTML = `
+const showVocabScore = () => {
+    vocabQuestionWrapper.innerHTML = `
         <p class="text-[20px] font-bold text-center">Quiz Complete! 🎉</p>
-        <p class="text-[18px] text-center">You got ${score} out of ${quizQuestions.length} correct.</p>
-        <button id="restart-btn" class="mt-2 bg-[#544DEA] text-white px-3 py-1 rounded-[15px] mx-auto block">Restart Quiz</button>
+        <p class="text-[18px] text-center">You got ${scoreVocab} out of ${vocabQuizQuestions.length} correct.</p>
+        <button id="restart-vocab-btn" class="mt-2 bg-[#544DEA] text-white px-3 py-1 rounded-[15px] mx-auto block">Okay</button>
     `;
 
-    document.getElementById("restart-btn").addEventListener("click", () => {
-        currentQuestionIndex = 0;
-        score = 0;
-        renderQuestion();
+    document.getElementById("restart-vocab-btn").addEventListener("click", () => {
+        currentVocabQuestionIndex = 0;
+        scoreVocab = 0;
+        renderVocabQuestion();
     });
 };
 
 const createVocabQuiz = (event) => {
     event.preventDefault();
-
-    createForm.parentElement.style.display = "none";
-    questionWrapper.style.display = "flex";
-    renderQuestion();
+    setTimeout(() => {
+    createVocabForm.parentElement.style.display = "none";
+    vocabQuestionWrapper.style.display = "flex";
+    renderVocabQuestion();
+    }, 6000);
 };
 
-createForm.addEventListener("submit", createVocabQuiz);
+createVocabForm.addEventListener("submit", createVocabQuiz);
+
+// Grammar Quiz section
+
+const renderGrammarQuestion = () => {
+    
+    const q = grammarQuizQuestions[currentGrammarQuestionIndex];
+    let optionsHtml = "";
+    q.choices.forEach((choice, idx) => {
+        optionsHtml += `
+            <div class="flex flex-row space-x-2 items-center">
+                <input name="grammar" type="radio" value="${idx}" id="choice${idx}">
+                <label for="choice${idx}">${choice}</label>
+            </div>`;
+    });
+
+    grammarQuestionWrapper.innerHTML = `
+        <p class="text-[18px] mb-2">${q.question}</p>
+        <form class="text-[16px] space-y-2">${optionsHtml}</form>
+        <button id="grammar-check-btn" class="mt-2 bg-[#544DEA] text-white px-3 py-0.5 rounded-[15px]">Check</button>
+        <p id="grammar-feedback" class="text-[16px] mt-2 font-bold"></p>
+    `;
+
+    document.querySelector("#grammar-check-btn").addEventListener("click", checkGrammarAnswer);
+    
+};
+
+const checkGrammarAnswer = (e) => {
+    e.preventDefault();
+    const selected = document.querySelector('input[name="grammar"]:checked');
+    const feedback = document.getElementById("grammar-feedback");
+
+    if (!selected) {
+        feedback.textContent = "Please select an answer.";
+        feedback.classList.add("text-red-500");
+        return;
+    }
+
+    const selectedIndex = parseInt(selected.value);
+    const isCorrect = selectedIndex === grammarQuizQuestions[currentGrammarQuestionIndex].correct;
+
+    if (isCorrect) {
+        feedback.textContent = "Correct! ✅";
+        feedback.classList.remove("text-red-500");
+        feedback.classList.add("text-green-600");
+        scoreGrammar++;
+    } else {
+        const correctText = grammarQuizQuestions[currentGrammarQuestionIndex].choices[grammarQuizQuestions[currentGrammarQuestionIndex].correct];
+        feedback.textContent = `Wrong ❌ — Correct answer is "${correctText}".`;
+        feedback.classList.remove("text-green-600");
+        feedback.classList.add("text-red-500");
+    }
+
+    document.getElementById("grammar-check-btn").textContent = "Next";
+    document.getElementById("grammar-check-btn").removeEventListener("click", checkGrammarAnswer);
+    document.getElementById("grammar-check-btn").addEventListener("click", nextGrammarQuestion);
+};
+
+const nextGrammarQuestion = (e) => {
+    e.preventDefault();
+    currentGrammarQuestionIndex++;
+
+    if (currentGrammarQuestionIndex < grammarQuizQuestions.length) {
+        renderGrammarQuestion();
+    } else {
+        showGrammarScore();
+    }
+};
+
+const showGrammarScore = () => {
+    grammarQuestionWrapper.innerHTML = `
+        <p class="text-[20px] font-bold text-center">Grammar Quiz Complete! 🎉</p>
+        <p class="text-[18px] text-center">You got ${scoreGrammar} out of ${grammarQuizQuestions.length} correct.</p>
+        <button id="restart-grammar-btn" class="mt-2 bg-[#544DEA] text-white px-3 py-1 rounded-[15px] mx-auto block">Okay</button>
+    `;
+
+    document.getElementById("restart-grammar-btn").addEventListener("click", () => {
+        currentGrammarQuestionIndex = 0;
+        scoreGrammar = 0;
+        renderGrammarQuestion();
+    });
+};
+
+const createGrammarQuiz = (event) => {
+    event.preventDefault();
+
+    setTimeout(() => {
+    createGrammarForm.parentElement.style.display = "none";
+    grammarQuestionWrapper.style.display = "flex";
+    renderGrammarQuestion();
+    }, 5500);
+};
+
+createGrammarForm.addEventListener("submit", createGrammarQuiz);
