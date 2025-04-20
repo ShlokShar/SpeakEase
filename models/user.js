@@ -12,11 +12,11 @@ const userSchema = new Schema({
     },
     language: {
         type: String,
-        required: false
+        required: true
     },
     chats: {
-        type: Array,
-        required: false
+        type: [String],
+        required: true
     }
 })
 

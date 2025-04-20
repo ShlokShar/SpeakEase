@@ -7,6 +7,8 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-red-500: oklch(63.7% 0.237 25.331);
+    --color-green-600: oklch(62.7% 0.194 149.214);
     --color-gray-100: oklch(96.7% 0.003 264.542);
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -203,6 +205,21 @@
   .mx-auto {
     margin-inline: auto;
   }
+  .mt-1 {
+    margin-top: calc(var(--spacing) * 1);
+  }
+  .mt-2 {
+    margin-top: calc(var(--spacing) * 2);
+  }
+  .mb-2 {
+    margin-bottom: calc(var(--spacing) * 2);
+  }
+  .block {
+    display: block;
+  }
+  .contents {
+    display: contents;
+  }
   .flex {
     display: flex;
   }
@@ -211,6 +228,9 @@
   }
   .h-\[78vh\] {
     height: 78vh;
+  }
+  .h-\[86vh\] {
+    height: 86vh;
   }
   .h-\[96vh\] {
     height: 96vh;
@@ -329,15 +349,8 @@
       margin-inline-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-x-reverse)));
     }
   }
-  .space-x-6 {
-    :where(& > :not(:last-child)) {
-      --tw-space-x-reverse: 0;
-      margin-inline-start: calc(calc(var(--spacing) * 6) * var(--tw-space-x-reverse));
-      margin-inline-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-x-reverse)));
-    }
-  }
-  .overflow-y-hidden {
-    overflow-y: hidden;
+  .overflow-y-auto {
+    overflow-y: auto;
   }
   .rounded-3xl {
     border-radius: var(--radius-3xl);
@@ -408,6 +421,9 @@
   .bg-\[\#FBFBFE\] {
     background-color: #FBFBFE;
   }
+  .bg-\[\#e1dede\] {
+    background-color: #e1dede;
+  }
   .bg-\[\#ffffff\] {
     background-color: #ffffff;
   }
@@ -459,8 +475,14 @@
   .pt-6 {
     padding-top: calc(var(--spacing) * 6);
   }
+  .pr-6 {
+    padding-right: calc(var(--spacing) * 6);
+  }
   .pb-2 {
     padding-bottom: calc(var(--spacing) * 2);
+  }
+  .text-center {
+    text-align: center;
   }
   .font-\[Fredoka\] {
     font-family: Fredoka;
@@ -484,11 +506,17 @@
     font-size: var(--text-xl);
     line-height: var(--tw-leading, var(--text-xl--line-height));
   }
+  .text-\[14px\] {
+    font-size: 14px;
+  }
   .text-\[16px\] {
     font-size: 16px;
   }
   .text-\[18px\] {
     font-size: 18px;
+  }
+  .text-\[20px\] {
+    font-size: 20px;
   }
   .text-\[40px\] {
     font-size: 40px;
@@ -513,6 +541,12 @@
   }
   .text-gray-100 {
     color: var(--color-gray-100);
+  }
+  .text-green-600 {
+    color: var(--color-green-600);
+  }
+  .text-red-500 {
+    color: var(--color-red-500);
   }
   .text-white {
     color: var(--color-white);

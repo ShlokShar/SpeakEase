@@ -82,7 +82,7 @@
     "start": "node app.js",
     "server": "nodemon app.js",
     "tailwind": "tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch",
-    "dev": "concurrently \"npm:tailwind\" \"npm:server\""
+    "main": "concurrently \"npm:tailwind\" \"npm:server\""
   },
   "keywords": [],
   "author": "",
